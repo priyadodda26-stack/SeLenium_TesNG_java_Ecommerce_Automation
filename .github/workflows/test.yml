@@ -1,26 +1,20 @@
-name: Selenium Tests
+- name: Upload Test Reports
+  if: always()
+  uses: actions/upload-artifact@v4
+  with:
+    name: test-reports
+    path: target/surefire-reports/
 
-on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+- name: Upload Extent Report
+  if: always()
+  uses: actions/upload-artifact@v4
+  with:
+    name: extent-report
+    path: test-output/
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Run tests
-        run: mvn test
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Run tests
-        run: mvn clean test
+- name: Upload Screenshots
+  if: always()
+  uses: actions/upload-artifact@v4
+  with:
+    name: screenshots
+    path: screenshots/
