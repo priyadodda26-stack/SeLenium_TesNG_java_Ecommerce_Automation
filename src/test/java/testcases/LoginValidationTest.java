@@ -29,7 +29,7 @@ public class LoginValidationTest extends BaseTest {
                                  String expectedResult) {
 
         WebDriver driver = getDriver();
-
+     //Login user
         LoginPage login = new LoginPage(driver);
         HomePage home = new HomePage(driver);
 
