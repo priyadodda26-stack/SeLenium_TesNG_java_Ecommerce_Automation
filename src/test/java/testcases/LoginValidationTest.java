@@ -18,12 +18,12 @@ import static pageObject.LoginPage.INVALID_LOGIN_ERROR;
 @Listeners(utils.TestListener.class)
 public class LoginValidationTest extends BaseTest {
 
-    @DataProvider(name = "loginData")
+    @DataProvider(name = "loginData" )
     public Object[][] loginData() throws Exception {
         return ExcelReader.getLoginData();
     }
 
-    @Test(dataProvider = "loginData")
+    @Test(dataProvider = "loginData", groups = {"smoke", "regression"} )
     public void TC001_validLogin(String username,
                                  String password,
                                  String expectedResult) {

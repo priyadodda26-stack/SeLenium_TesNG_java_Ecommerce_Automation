@@ -11,16 +11,27 @@ import utils.ConfigReader;
 import utils.TestListener;
 
 @Listeners(TestListener.class)
+
 public class BaseTest {
 
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
 
-        return driver.get();
+        WebDriver drv = driver.get();
+
+        if (drv == null) {
+            throw new RuntimeException(
+                    "Driver is NULL. Possible reasons:\n" +
+                            "1. @BeforeMethod not executed\n" +
+                            "2. Group filtering skipped setup\n" +
+                            "3. Parallel thread mismatch\n");
+        }
+
+        return drv;
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
 
         String browser =

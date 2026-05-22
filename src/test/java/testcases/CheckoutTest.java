@@ -8,7 +8,7 @@ import pageObject.LoginPage;
 
 public class CheckoutTest extends BaseTest {
 
-    @Test
+    @Test(groups = {"checkout", "regression"})
     public void verifyCheckoutFlow() {
 
 

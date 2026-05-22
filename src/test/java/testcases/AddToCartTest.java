@@ -12,7 +12,7 @@ import pageObject.LoginPage;
 
 public class AddToCartTest extends BaseTest {
 
-    @Test
+    @Test(groups = {"Cart", "regression"})
     public void Tc002_verifyCartCount() {
 
         WebDriver driver = getDriver();
