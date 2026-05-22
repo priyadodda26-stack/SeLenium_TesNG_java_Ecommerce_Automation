@@ -3,6 +3,7 @@ package testcases;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -42,10 +43,16 @@ public class BaseTest {
         switch (browser.toLowerCase()) {
 
             case "chrome":
-
                 WebDriverManager.chromedriver().setup();
 
-                webDriver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+
+                options.addArguments("--headless=new");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--remote-allow-origins=*");
+
+                webDriver = new ChromeDriver(options);
 
                 break;
 
@@ -79,6 +86,7 @@ public class BaseTest {
         if (webDriver != null) {
 
             webDriver.quit();
+            driver.remove();
         }
     }
 }
